@@ -1,3 +1,4 @@
+// Stack is LIFO
 #include<stdio.h>
 int arr[5],top,x;
 // functions needs declaration like this before calling or defining it
@@ -8,10 +9,10 @@ void pop(void);
 int main(){
     top = -1;
     printf("Stack implementation using arrays\n");
-    push(3);
-    push(4);
-    push(5);
-    pop();
+    push(3);//f
+    push(4);//s
+    push(5);//t
+    //the array looks like this 5 4 3
     pop();
     show();
     return 0;
