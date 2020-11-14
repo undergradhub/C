@@ -13,6 +13,15 @@ void printlist(struct node *p){
         p = p->next;
     }
 }
+
+void add_at_start(struct node **ref,int item){
+    struct node *newnode = malloc(sizeof(struct node));
+    newnode->data = item;
+    newnode->next = (*ref);
+
+    (*ref) = newnode;
+
+}
 int main(){
     // initializing structs
     struct node *head;
@@ -23,7 +32,7 @@ int main(){
     //printing nodes pointer
     struct node *p;
     //allocate memory
-    one = malloc(sizeof(struct node));
+    one = (struct node*)malloc(sizeof(struct node));
     two = malloc(sizeof(struct node));
     three = malloc(sizeof(struct node));
 
@@ -40,10 +49,6 @@ int main(){
     head = one;
 
     printf("Printing nodes\n");
+    addatstart(&head,5);
     printlist(head);
-    int *pointer, c;
-    c = 1;
-    pointer = &c;
-    *pointer = (long unsigned int) &c;
-    printf("%d",*pointer);
 }
