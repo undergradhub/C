@@ -7,48 +7,101 @@ struct node{
     int data;
     struct node *next;
 };
+struct node *head;
+
 void printlist(struct node *p){
     while(p != NULL){
-        printf("%d\n",p->data);
+        printf("element: %d\n",p->data);
         p = p->next;
     }
 }
+//adding at index
+void add_at_index(int index, int item){
+    struct node *newnode = malloc(sizeof(struct node));
+    struct node *ptr;
+    newnode->data = item;
+    if(newnode == NULL){
+        printf("Memory Overflow at add at index");
 
-void add_at_start(struct node **ref,int item){
+    }
+    //getting the head
+    ptr = head;
+    if(index == 0){
+        newnode->next = head;
+        head = newnode;
+    }else{
+        for(int i   = 0; i < index - 1; i++){
+            ptr = ptr->next;
+            if(ptr == NULL){
+                printf("Cant Insert");
+                return;
+            }
+        }
+        newnode->next = ptr->next;
+        ptr->next = newnode;
+    }
+}
+//adding at start
+void add_at_start(int item){
     struct node *newnode = malloc(sizeof(struct node));
     newnode->data = item;
-    newnode->next = (*ref);
+    if(newnode == NULL){
+        printf("Memory overflow at add at start");
+        return;
+    }
+    if(head == NULL){
+        head = newnode;
+    }else{
+        newnode->next = head;
+        head = newnode;
+    }
+}
 
-    (*ref) = newnode;
+//adding at end
+void add_at_end(int item){
+    struct node *newnode = malloc(sizeof(struct node));
+    // ptr to get the last node
+    struct node *ptr;
+
+    //since its adding at the end, next is always gona point at NULL so
+    newnode->data = item;
+    newnode->next = NULL;
+
+    if(newnode == NULL){
+        printf("Memory overflow, newnode pointing to NULL");
+        return;
+    }
+    if(head == NULL){
+        printf("Head is null, insert at beginning\n");
+        head = newnode;
+    }else{
+        printf("Head not null, normal insert\n");
+        ptr = head;
+        while(ptr->next != NULL){
+            ptr = ptr->next;
+        } 
+
+        // after getting the last node point it to the newnode and newnode points to NULL
+        ptr->next = newnode;
+    }
+    
 
 }
 int main(){
-    // initializing structs
-    struct node *head;
-    struct node *one = NULL; //storing NULL value on the address location *one
-    struct node *two = NULL;
-    struct node *three = NULL;
 
     //printing nodes pointer
     struct node *p;
-    //allocate memory
-    one = (struct node*)malloc(sizeof(struct node));
-    two = malloc(sizeof(struct node));
-    three = malloc(sizeof(struct node));
-
-    //assign values
-    one->data = 10;
-    two->data = 20;
-    three->data = 30;
-
-    //linking nodes
-    one->next = two; // since next is a pointer, we're pointing current pointer to the next pointer i.e one->next = two
-    two->next = three;
-    three->next = NULL;
-
-    head = one;
-
-    printf("Printing nodes\n");
-    addatstart(&head,5);
+    add_at_start(100);
+    add_at_end(500);
+    add_at_start(200);
+    add_at_start(300);
+    add_at_start(3045);
+    add_at_end(1000);
+    add_at_start(2000);
+    add_at_start(34345);
+    add_at_index(1,3000);
+    add_at_index(0,4000);
+    add_at_end(333);
     printlist(head);
+    
 }
