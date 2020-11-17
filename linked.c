@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-// implementing LInked List 
+// implementing Linked List 
 
 struct node{
     /* data */
@@ -131,26 +131,52 @@ void delete_at_end(){
     printf("Node deleted at end\n");
 }
 
+//delete at index
+void delete_at_index(int index){
+    struct node *del_ptr, *ptr;
+    del_ptr = head;
+    if(head == NULL){
+        printf("List is empty\n");
+        return;
+    }
+    if(index == 0){
+        delete_at_start();
+        return;
+    }
+    for(int i = 0; i < index; i++){
+        ptr = del_ptr;
+        del_ptr = del_ptr->next;
+    }
+    if(del_ptr->next == NULL){
+        delete_at_end();
+        return;
+    }
+    ptr->next = del_ptr->next;
+    free(del_ptr);
+    printf("Element deleted at index\n");
+}
+
 int main(){
 
     //printing nodes pointer
     struct node *p;
     add_at_start(100);
     add_at_end(500);
-    add_at_start(200);
-    add_at_start(300);
-    add_at_start(3045);
-    add_at_end(1000);
-    add_at_start(2000);
-    add_at_start(34345);
-    add_at_index(1,3000);
-    add_at_index(0,4000);
-    add_at_end(333);
+    // add_at_start(200);
+    // add_at_start(300);
+    // add_at_start(3045);
+    // add_at_end(1000);
+    // add_at_start(2000);
+    // add_at_start(34345);
+    // add_at_index(1,3000);
+    // add_at_index(0,4000);
+    // add_at_end(333);
 
     // delete operation
 
     delete_at_start();
     delete_at_end();
+    delete_at_index(2);
     printlist(head);
     
 }
