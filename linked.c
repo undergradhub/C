@@ -9,7 +9,12 @@ struct node{
 };
 struct node *head;
 
+//head is passed here
 void printlist(struct node *p){
+    if(p == NULL){
+        printf("List is empty\n");
+        return;
+    }
     while(p != NULL){
         printf("element: %d\n",p->data);
         p = p->next;
@@ -87,6 +92,45 @@ void add_at_end(int item){
     
 
 }
+
+// delete at beginning
+void delete_at_start(){
+    if(head == NULL){
+        printf("List is empty\n");
+        return;
+    }
+    struct node *delete_ptr;
+
+    delete_ptr = head;
+    head = delete_ptr->next;
+
+    free(delete_ptr);
+    printf("Element deleted\n");
+}
+
+//delete at end
+void delete_at_end(){
+    if(head == NULL){
+        printf("List is empty\n");
+        return;
+    }
+    if(head->next == NULL){
+        head = NULL;
+        free(head);
+        return;
+    }
+    struct node *last_ptr,*secondlast_ptr;
+    last_ptr = head;
+    while(last_ptr->next != NULL){
+        secondlast_ptr = last_ptr;
+        last_ptr = last_ptr->next;
+    }
+
+    secondlast_ptr->next = NULL;
+    free(last_ptr);
+    printf("Node deleted at end\n");
+}
+
 int main(){
 
     //printing nodes pointer
@@ -102,6 +146,11 @@ int main(){
     add_at_index(1,3000);
     add_at_index(0,4000);
     add_at_end(333);
+
+    // delete operation
+
+    delete_at_start();
+    delete_at_end();
     printlist(head);
     
 }
