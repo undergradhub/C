@@ -8,7 +8,8 @@ struct node{
     struct node *next;
 };
 struct node *head;
-
+long int size = 0;
+void add_at_start(int item);
 //head is passed here
 void printlist(struct node *p){
     if(p == NULL){
@@ -19,6 +20,7 @@ void printlist(struct node *p){
         printf("element: %d\n",p->data);
         p = p->next;
     }
+    printf("Size of linked list %ld\n",size);
 }
 //adding at index
 void add_at_index(int index, int item){
@@ -27,15 +29,13 @@ void add_at_index(int index, int item){
     newnode->data = item;
     if(newnode == NULL){
         printf("Memory Overflow at add at index");
-
     }
     //getting the head
     ptr = head;
     if(index == 0){
-        newnode->next = head;
-        head = newnode;
+        add_at_start(item);
     }else{
-        for(int i   = 0; i < index - 1; i++){
+        for(int i  = 0; i < index ; i++){
             ptr = ptr->next;
             if(ptr == NULL){
                 printf("Cant Insert");
@@ -44,6 +44,7 @@ void add_at_index(int index, int item){
         }
         newnode->next = ptr->next;
         ptr->next = newnode;
+        size++;
     }
 }
 //adding at start
@@ -56,9 +57,11 @@ void add_at_start(int item){
     }
     if(head == NULL){
         head = newnode;
+        size++;
     }else{
         newnode->next = head;
         head = newnode;
+        size++;
     }
 }
 
@@ -79,6 +82,7 @@ void add_at_end(int item){
     if(head == NULL){
         printf("Head is null, insert at beginning\n");
         head = newnode;
+        size++;
     }else{
         printf("Head not null, normal insert\n");
         ptr = head;
@@ -88,6 +92,7 @@ void add_at_end(int item){
 
         // after getting the last node point it to the newnode and newnode points to NULL
         ptr->next = newnode;
+        size++;
     }
     
 
@@ -105,6 +110,7 @@ void delete_at_start(){
     head = delete_ptr->next;
 
     free(delete_ptr);
+    size--;
     printf("Element deleted\n");
 }
 
@@ -117,6 +123,7 @@ void delete_at_end(){
     if(head->next == NULL){
         head = NULL;
         free(head);
+        size--;
         return;
     }
     struct node *last_ptr,*secondlast_ptr;
@@ -128,6 +135,7 @@ void delete_at_end(){
 
     secondlast_ptr->next = NULL;
     free(last_ptr);
+    size--;
     printf("Node deleted at end\n");
 }
 
@@ -135,6 +143,10 @@ void delete_at_end(){
 void delete_at_index(int index){
     struct node *del_ptr, *ptr;
     del_ptr = head;
+    if(index > size){
+        printf("Index out of bounds\n");
+        return;
+    }
     if(head == NULL){
         printf("List is empty\n");
         return;
@@ -153,6 +165,7 @@ void delete_at_index(int index){
     }
     ptr->next = del_ptr->next;
     free(del_ptr);
+    size--;
     printf("Element deleted at index\n");
 }
 
@@ -162,15 +175,15 @@ int main(){
     struct node *p;
     add_at_start(100);
     add_at_end(500);
-    // add_at_start(200);
-    // add_at_start(300);
-    // add_at_start(3045);
-    // add_at_end(1000);
-    // add_at_start(2000);
-    // add_at_start(34345);
-    // add_at_index(1,3000);
-    // add_at_index(0,4000);
-    // add_at_end(333);
+    add_at_start(200);
+    add_at_start(300);
+    add_at_start(3045);
+    add_at_end(1000);
+    add_at_start(2000);
+    add_at_start(34345);
+    add_at_index(1,3000);
+    add_at_index(0,4000);
+    add_at_end(333);
 
     // delete operation
 
