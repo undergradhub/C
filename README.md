@@ -8,5 +8,5 @@
 
 ## Contributing:
 
-- Add em resources, links, books in ``##Links`` Section
+- Add em resources, links, books in ``Links`` Section
 - Create em repo, fork em, submit a PR 
