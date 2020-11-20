@@ -1,6 +1,6 @@
 # data-structure-C
 
-*add a silly inspirational slogan* yikes
+*add a silly inspirational slogan* Let's get coding
 
 ## Links:
 
