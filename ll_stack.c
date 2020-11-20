@@ -14,28 +14,20 @@ long int size;
 
 //pushing onto top of stack
 void push(int item){
-    if(head == NULL){
+    if(top == NULL){
         printf("Stack is empty, inserting at index 0\n");
         struct stack *newnode = malloc(sizeof(struct stack));
         newnode->item = item;
-        newnode->next = NULL;
-        head = newnode;
+        newnode->next = top;
         top = newnode;
         size++;
+        if(newnode->next == NULL) printf("true");
         return;
     }else{
         printf("Stack isnt empty, inserting at next index\n");
         struct stack *newnode = malloc(sizeof(struct stack));
         newnode->item = item;
-        newnode->next = NULL;
-        //This operation is same as inserting a node at the end, since stack is LIFO
-        //so we declare a ptr to get the last node
-        struct stack *ptr;
-        ptr = head;
-        while(ptr->next != NULL){
-            ptr = ptr->next;
-        }
-        ptr->next = newnode;
+        newnode->next = top;
         top = newnode;
         size++;
         
@@ -44,41 +36,42 @@ void push(int item){
 //pop operation
 void pop(){
     printf("Top is:%d\n",top->item);
-    if(head == NULL){
+    if(top == NULL){
         printf("Stack is empty\n");
         return;
     }
-    if(head->next == NULL){
-        head = NULL;
-        free(head);
+    // if theres only one node, then make top point null and free it
+    if(top->next ==NULL){
+        top = NULL;
+        free(top);
         size--;
-        return;
-    }
-    struct stack *ptr,*sptr;
-    ptr = head;
-    while(ptr != top){
-        sptr = ptr;
-        ptr = ptr->next;
+    }else{
+        struct stack *ptr; // ptr for node thats gona be deleted
+        ptr = top; // assign top, since LIFO
+        top = top->next; // point top to address of next node 
+        printf("top is %d\n",top->item);
+        size--;
+        free(ptr); // deleting the ptr
+        // Visualization
+            /*
+            10(add1) -> 5(add2) -> NULL
+            top = add1
+            pop()
+            make top  = add2
+            delete ptr
 
-    }
-    sptr->next = NULL;
-    top = sptr;
-    size--;
-    printf("Deleting element %d\n",ptr->item);
-    free(ptr);
+            */
+    } // if there are multiple nodes then do this
 }
 //printing stack
 void printstack(struct stack *p){
     if(p == NULL){
-        printf("Stack is empty,now exiting\n");
-        return;
-    }
+        printf("NULL\n");
+    }else{
     //fix this, run from top till the head
-    while(p != NULL){
-        printf("%d--->",p->item);
-        p = p->next;
+        printf("%d-->",p->item);
+        printstack(p->next);
     }
-    printf("\nSize of Stack %ld",size);
 }
 int main(){
     push(5);
@@ -90,5 +83,7 @@ int main(){
     pop();
     pop();
     pop();
-    printstack(head);
+    pop();
+    printstack(top);
 }
+
