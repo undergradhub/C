@@ -10,3 +10,4 @@
 
 - Add em resources, links, books in ``Links`` Section
 - Create em repo, fork em, submit a PR 
+- Needless to say, don't send stupid PR and buggy code
