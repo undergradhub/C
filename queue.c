@@ -35,6 +35,10 @@ int insert(int elem){
 
 //show q
 void show(){
+    if(front == -1){
+	    printf("Queue is empty");
+	    return;
+    }
     for(int i = front; i <=rear; i++){
         printf("elem %d at pos %d;\t",q[i],i);
     }
@@ -44,8 +48,12 @@ void show(){
 void delete(){
     if(front <= -1){
         printf("Queue is empty");
+	return;
     }else{
         front++;
         printf("Element deleted\n");
+	if(front > rear)
+		front = rear = -1;
+
     }
 }
