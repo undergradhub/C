@@ -5,6 +5,8 @@ int q[size];
 int front = -1,rear = -1;
 
 void insert(int item){
+    //The second case(front == rear + 1) happens when REAR starts from 0 due to circular increment
+    // and when its value is just 1 less than FRONT, the queue is full.
     if((front == rear +1) || (front == 0 && rear == size -1)){
         printf("Q is full");
         return;
@@ -20,10 +22,11 @@ void delete(){
         printf("q is empty\n");
         return;
     }else{
+        /*When theres only one element left to be deleted
+        reassign front and rear */
         if(front == rear){
             front = -1;
             rear = -1;
-            printf("test out\n");
         }else{
             printf("[-] Element deleted from %d\n",front);
             front = (front + 1) % size;
@@ -32,7 +35,7 @@ void delete(){
 }
 
 void show(){
-    printf("%d f %d r\n",front, rear);
+    printf("[front]%d [rear]%d \n",front, rear);
     if(front == -1){
         printf("Empty\n");
         return;
@@ -54,6 +57,5 @@ int main(){
     delete();
     insert(13);
     show();
-    // display();
     return 0;
 }
