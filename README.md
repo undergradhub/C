@@ -11,5 +11,6 @@
 ## Contributing:
 
 - Add em resources, links, books in ``Links`` Section
-- Create em repo, fork em, submit a PR 
-- Needless to say, don't send stupid PR and buggy code
+- add **Comments** and let others know what you did 
+- Higly recommending testing locally, leave no cases unturned before sending a PR
+- Needless to say, don't send stupid PR 
