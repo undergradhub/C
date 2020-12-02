@@ -7,6 +7,7 @@
 - [Progamiz DSA](https://www.programiz.com/dsa)
 - [BigO for beginners](https://hackernoon.com/big-o-for-beginners-622a64760e2)
 - [BigO cheatsheet](https://www.bigocheatsheet.com/)
+- [Visual Algo](https://visualgo.net/en)
 
 ## Contributing:
 
