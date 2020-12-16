@@ -16,6 +16,12 @@ void add_at_start(int data){
 		newnode->next = NULL;
 		head = newnode;
 	}else{
+		/*
+		- make the newnode next to point to first node ie head
+		- make the first node prev point to newnode
+		- newnode prev should be NULL
+		- then assign head to newnode
+		*/
 		newnode->next = head;
 		head->prev = newnode;
 		newnode->prev = NULL;
@@ -49,11 +55,20 @@ void delete_at_start(){
 		return;
 	}
 	if(head->next == NULL){
+		/* If there is only one element in the list
+		- simple make head null, emptying the list 
+		- Free the head
+		*/
 		head = NULL;
 		free(head);
 		return;
 	}else{
 		struct doubly *temp;
+		/* If there are multiple elements in the list 
+		- make head point towards second element ie head->next
+		- make the previous of second element point NULL
+		- free the temp ie head
+		*/
 		temp = head;
 		head = head->next;
 		head->prev = NULL;
@@ -100,7 +115,7 @@ int main(){
 	add_at_start(20);
 	add_at_end(30);
 	add_at_end(40);
-	// delete_at_start();
+	delete_at_start();
 	delete_at_end();
 	show(head);
 }
