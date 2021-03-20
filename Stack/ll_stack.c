@@ -73,6 +73,11 @@ void printstack(struct stack *p){
         printstack(p->next);
     }
 }
+
+void peek(){
+    printf("Peeking in %d\n",top->item);
+    return;
+}
 int main(){
     push(5);
     push(10);
@@ -85,5 +90,6 @@ int main(){
     pop();
     pop();
     printstack(top);
+    peek();
 }
 

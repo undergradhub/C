@@ -10,9 +10,10 @@ int main(){
     top = -1;
     printf("Stack implementation using arrays\n");
     push(3);//f
-    push(4);//s
-    push(5);//t
+    // push(4);//s
+    // push(5);//t
     //the array looks like this 5 4 3
+    pop();
     pop();
     show();
     return 0;
@@ -38,7 +39,7 @@ void show(){
 // pop item from stack
 void pop(){
     if(top <= -1){
-        printf("Emtpy");
+        printf("underflow\n");
     }
     arr[top] = 0;
     top--;
